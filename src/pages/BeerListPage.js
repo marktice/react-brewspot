@@ -1,16 +1,43 @@
 import React, { Component } from 'react';
 
 import beerAPI from './../api/beerAPI';
+import BeerPage from './BeerPage';
+import Beer from './../components/Beer';
 
 class BeerListPage extends Component {
   state = {
     beers: null
   };
+  // Class Methods
+  handleDeleteBeer = (id) => {
+    beerAPI
+      .deleteBeer(id)
+      .then((result) => {
+        this.setState((prevState) => {
+          return {
+            beers: prevState.beers.filter((beer) => beer.id !== id)
+          };
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
+  // Lifecycle methods
   componentDidMount() {
     beerAPI
       .fetchBeers()
-      .then((beers) => {
+      .then((beersData) => {
+        const beers = beersData.map((beer) => {
+          return {
+            id: beer.id,
+            name: beer.name,
+            tagline: beer.tagline,
+            description: beer.description,
+            imageURL: beer.image_url
+          };
+        });
         this.setState((prevState) => {
           return {
             beers
@@ -28,12 +55,20 @@ class BeerListPage extends Component {
       return <h3>fetching beers...</h3>;
     }
     return (
-      <ul>
+      <div className="beer-list-page">
         <h1>Beerslist</h1>
-        {beers.map((beer) => {
-          return <li key={beer.id}>{beer.name}</li>;
-        })}
-      </ul>
+        <div className="beer-list">
+          {beers.map((beer) => {
+            return (
+              <Beer
+                key={beer.id}
+                {...beer}
+                handleDeleteBeer={this.handleDeleteBeer}
+              />
+            );
+          })}
+        </div>
+      </div>
     );
   }
 }

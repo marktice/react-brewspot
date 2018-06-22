@@ -1,8 +1,11 @@
+// Beer List
 .beer-list {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly; }
+  justify-content: space-evenly;
+}
 
+// Beer
 .beer {
   margin-top: 15px;
   margin-bottom: 15px;
@@ -12,27 +15,34 @@
   border: 1px solid black;
   transition: ease 0.3s;
   border-radius: 3px;
+
   display: flex;
   flex-direction: column;
-  justify-content: space-between; }
+  justify-content: space-between;
+}
 
 .beer:hover {
   background: dodgerblue;
   box-shadow: 4px 6px 5px 0px rgba(0, 0, 0, 0.75);
-  transform: scale(1.01); }
+  transform: scale(1.01);
+}
 
 .beer__body {
-  font-size: 10pt; }
+  font-size: 10pt;
+}
 
 .beer__img {
-  max-height: 150px; }
+  max-height: 150px;
+}
 
 .beer__delete {
-  background: #adacac;
+  background: rgb(173, 172, 172);
   padding: 10px 20px;
   cursor: pointer;
-  float: right; }
+  float: right;
+}
 
 .beer__delete:hover {
   background: crimson;
-  color: white; }
+  color: white;
+}
