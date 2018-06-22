@@ -1,12 +1,12 @@
 import axios from './init';
 
-async function fetchBeers() {
+const fetchBeers = async () => {
   try {
     const response = await axios.get('/beers');
     return response.data;
   } catch (error) {
     return error;
   }
-}
+};
 
-export default fetchBeers;
+export default { fetchBeers };
